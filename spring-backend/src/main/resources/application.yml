@@ -1,1 +1,17 @@
-spring.application.name=spring-backend
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017
+      database: spring
+  application:
+    name: spring-backend
+
+---
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      uri: mongodb://root:example@mongo:27017
+      database: spring-dev
+  application:
+    name: spring-backend-docker

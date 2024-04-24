@@ -1,30 +1,49 @@
 package com.almeidaprojects.springbackend;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Service
+@RestController
 @RequiredArgsConstructor
-public class PersonService {
+@Slf4j
+public class PersonController {
     private final PersonRepository personRepository;
 
-    public Person save(Person person) {
-        return personRepository.save(person);
+    @PostMapping("/person")
+    public ResponseEntity<Person> save(@Valid @RequestBody Person person) {
+        log.info("Saving person: {}", person);
+        return ResponseEntity.ok(personRepository.save(person));
     }
 
-    public Person findById(String id) {
-        return personRepository.findById(id).orElseThrow(() -> new NotFoundException("Person not found"));
+    @GetMapping("/person/{id}")
+    public ResponseEntity<?> findById(@PathVariable String id) {
+        log.info("Finding person with id: {}", id);
+        Person person = personRepository.findById(id).orElse(null);
+        if (person == null) {
+            return ResponseEntity.status(404).body("Person not found");
+        }
+        return ResponseEntity.ok(person);
     }
 
-    public void delete(String id) {
+    @DeleteMapping("/person/{id}")
+    public ResponseEntity<?> delete(@PathVariable String id) {
+        log.info("Deleting person with id: {}", id);
+        if (!personRepository.existsById(id)) {
+            return ResponseEntity.status(404).body("Person not found");
+        }
         personRepository.deleteById(id);
+        return ResponseEntity.ok("Person deleted");
     }
 
-    public List<Person> findAll() {
-        return personRepository.findAll();
+    @GetMapping("/person")
+    public ResponseEntity<List<Person>> findAll() {
+        log.info("Listing all persons");
+        return ResponseEntity.ok(personRepository.findAll());
     }
 
 }
