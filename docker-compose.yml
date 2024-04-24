@@ -2,14 +2,14 @@ services:
   angular:
     build: ./angular-frontend
     ports:
-      - 8085:4200
+      - "8085:4200"
     depends_on:
       - springboot
 
   springboot:
     build: ./spring-backend
     ports:
-      - 8080:8080
+      - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
@@ -18,9 +18,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017 # Not Required as backend is in the same stack
 
   mongo-express:
     image: mongo-express
+    restart: always
     ports:
       - 8081:8081
     environment:
@@ -28,4 +31,6 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
       ME_CONFIG_BASICAUTH: false
-    
+
+
+
