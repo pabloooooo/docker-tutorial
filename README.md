@@ -24,3 +24,7 @@ Backend:
 The first time you run the `docker-compose up` command in the root directory, it may take a while for the containers to build as your system caches and builds the containers. After this, subsequent runs will be much quicker.
 
 Once the Docker stack is running, you can access the Angular frontend application by opening your web browser and navigating to `http://localhost:8085`.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
