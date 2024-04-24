@@ -8,10 +8,12 @@ spring:
 
 ---
 spring:
-  profiles: docker
   data:
     mongodb:
       uri: mongodb://root:example@mongo:27017
       database: spring-dev
   application:
     name: spring-backend-docker
+  config:
+    activate:
+      on-profile: docker
