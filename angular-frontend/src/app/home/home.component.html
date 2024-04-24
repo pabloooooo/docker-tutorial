@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <span>My Application</span>
+  <span class="spacer"></span>
+  <button mat-flat-button color="primary" (click)="openDialog()">Create</button>
+</mat-toolbar>
+
+<div class="container">
+
+  <mat-card class="person-card" *ngFor="let person of people" id="{{person.id}}">
+    <mat-card-header>
+      <mat-card-title>{{ person.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button mat-button color="warn" (click)="deletePerson(person.id)">DELETE</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

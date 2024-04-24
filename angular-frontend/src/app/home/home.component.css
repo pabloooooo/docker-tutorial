@@ -1,0 +1,18 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(128, 128, 128, 0.27);
+}
+
+.person-card {
+  /*flex: 1 1 0;*/
+  width: 9em;
+  height: 9em;
+  margin: 1em;
+}
